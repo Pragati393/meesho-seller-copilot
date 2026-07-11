@@ -22,7 +22,7 @@ export default function AIAssistant() {
     try {
 
         const res = await fetch(
-            `http://127.0.0.1:8000/router?query=${encodeURIComponent(query)}`
+            `http://${process.env.NEXT_PUBLIC_API_URL}/router?query=${encodeURIComponent(query)}`
         );
 
         const data = await res.json();

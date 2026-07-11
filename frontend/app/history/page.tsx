@@ -50,15 +50,15 @@ export default function HistoryPage() {
     }
 
     const listingRes = await fetch(
-      `http://127.0.0.1:8000/history/listings?user_id=${user.id}`
+      `http://${process.env.NEXT_PUBLIC_API_URL}/history/listings?user_id=${user.id}`
     );
 
     const pricingRes = await fetch(
-      `http://127.0.0.1:8000/history/pricing?user_id=${user.id}`
+      `http://${process.env.NEXT_PUBLIC_API_URL}/history/pricing?user_id=${user.id}`
     );
 
     const replyRes = await fetch(
-      `http://127.0.0.1:8000/history/replies?user_id=${user.id}`
+      `http://${process.env.NEXT_PUBLIC_API_URL}/history/replies?user_id=${user.id}`
     );
 
     setListings(await listingRes.json());

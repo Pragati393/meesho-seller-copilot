@@ -31,7 +31,7 @@ export default function Analytics() {
         if (!user) return;
 
         const response = await fetch(
-            `http://127.0.0.1:8000/dashboard/stats?user_id=${user.id}`
+            `http://${process.env.NEXT_PUBLIC_API_URL}/dashboard/stats?user_id=${user.id}`
         );
 
         const data = await response.json();

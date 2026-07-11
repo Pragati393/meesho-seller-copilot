@@ -40,7 +40,7 @@ async function generateListing() {
     console.log("4 - Sending request");
 
     const response = await fetch(
-      `http://127.0.0.1:8000/generate?product=${encodeURIComponent(product)}&user_id=${user.id}`
+      `http://${process.env.NEXT_PUBLIC_API_URL}/generate?product=${encodeURIComponent(product)}&user_id=${user.id}`
     );
 
     console.log("5 - Response received");
