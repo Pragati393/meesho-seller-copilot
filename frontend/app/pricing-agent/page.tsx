@@ -54,7 +54,7 @@ export default function PricingAgent() {
     }
 
     const response = await fetch(
-      `http://${process.env.NEXT_PUBLIC_API_URL}/pricing?product=${encodeURIComponent(product)}&cost_price=${costPrice}&user_id=${user.id}`
+      `${process.env.NEXT_PUBLIC_API_URL}/pricing?product=${encodeURIComponent(product)}&cost_price=${costPrice}&user_id=${user.id}`
     );
 
     const data = await response.json();

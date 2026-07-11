@@ -19,7 +19,7 @@ export default function RouterPage() {
         setLoading(true);
 
         const response = await fetch(
-            `http://${process.env.NEXT_PUBLIC_API_URL}/router?query=${encodeURIComponent(query)}`
+            `${process.env.NEXT_PUBLIC_API_URL}/router?query=${encodeURIComponent(query)}`
         );
 
         const data = await response.json();

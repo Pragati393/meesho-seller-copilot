@@ -31,7 +31,7 @@ export default function ReplyAgent() {
     }
 
     const response = await fetch(
-      `http://${process.env.NEXT_PUBLIC_API_URL}/reply?message=${encodeURIComponent(message)}&user_id=${user.id}`
+      `${process.env.NEXT_PUBLIC_API_URL}/reply?message=${encodeURIComponent(message)}&user_id=${user.id}`
     );
 
     const data = await response.json();
