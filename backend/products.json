@@ -1,0 +1,84 @@
+{
+  "products": [
+    {
+      "product_name": "Men Casual Shirt",
+      "category": "Fashion",
+      "amazon_price": 799,
+      "flipkart_price": 749,
+      "meesho_avg_price": 599,
+      "keywords": ["shirt", "men", "casual"]
+    },
+    {
+      "product_name": "Women Cotton Kurti",
+      "category": "Fashion",
+      "amazon_price": 699,
+      "flipkart_price": 649,
+      "meesho_avg_price": 499,
+      "keywords": ["kurti", "women", "cotton"]
+    },
+    {
+      "product_name": "Bluetooth Earbuds",
+      "category": "Electronics",
+      "amazon_price": 1499,
+      "flipkart_price": 1399,
+      "meesho_avg_price": 1199,
+      "keywords": ["earbuds", "bluetooth", "headphones"]
+    },
+    {
+      "product_name": "Steel Water Bottle",
+      "category": "Kitchen",
+      "amazon_price": 499,
+      "flipkart_price": 459,
+      "meesho_avg_price": 399,
+      "keywords": ["bottle", "water", "steel"]
+    },
+    {
+      "product_name": "Phone Cover",
+      "category": "Accessories",
+      "amazon_price": 299,
+      "flipkart_price": 279,
+      "meesho_avg_price": 199,
+      "keywords": ["cover", "phone", "case"]
+    },
+    {
+      "product_name": "LED Table Lamp",
+      "category": "Home",
+      "amazon_price": 999,
+      "flipkart_price": 949,
+      "meesho_avg_price": 799,
+      "keywords": ["lamp", "led", "table"]
+    },
+    {
+      "product_name": "Cotton Bedsheet",
+      "category": "Home",
+      "amazon_price": 899,
+      "flipkart_price": 849,
+      "meesho_avg_price": 699,
+      "keywords": ["bedsheet", "cotton", "bed"]
+    },
+    {
+      "product_name": "Lunch Box",
+      "category": "Kitchen",
+      "amazon_price": 399,
+      "flipkart_price": 379,
+      "meesho_avg_price": 299,
+      "keywords": ["lunch", "box", "tiffin"]
+    },
+    {
+      "product_name": "Women's Handbag",
+      "category": "Fashion",
+      "amazon_price": 1199,
+      "flipkart_price": 1099,
+      "meesho_avg_price": 899,
+      "keywords": ["bag", "handbag", "women"]
+    },
+    {
+      "product_name": "Smart Watch",
+      "category": "Electronics",
+      "amazon_price": 2499,
+      "flipkart_price": 2299,
+      "meesho_avg_price": 1999,
+      "keywords": ["watch", "smartwatch", "smart"]
+    }
+  ]
+}
