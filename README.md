@@ -13,19 +13,7 @@ Built using **Next.js**, **FastAPI**, **Google Gemini AI**, and **Supabase**, th
 
 ---
 
-# 🎥 Demo
 
-> **Coming Soon**
-
-Add screenshots or a short GIF of:
-
-- Dashboard
-- Listing Agent
-- Pricing Agent
-- Reply Agent
-- History Page
-
----
 
 # 🧩 Problem Statement
 
