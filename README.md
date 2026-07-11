@@ -400,7 +400,7 @@ _Add screenshot_
 
 # 👩‍💻 Author
 
-**Pragati Sharma**
+**Pragati**
 
 B.Tech, Electronics & Communication Engineering
 
