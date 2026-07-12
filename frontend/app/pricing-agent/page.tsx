@@ -104,15 +104,15 @@ export default function PricingAgent() {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-pink-50 to-white">
+    <main className="min-h-screen bg-ink text-paper">
 
       <div className="text-center pt-16">
 
-        <h1 className="text-5xl font-bold text-pink-600">
+        <h1 className="text-5xl font-bold font-display text-mustard">
           💰 Pricing Agent
         </h1>
 
-        <p className="text-gray-500 mt-4 text-lg">
+        <p className="text-parchment mt-4 text-lg">
           AI Powered Competitor Price Analysis
         </p>
 
@@ -120,7 +120,7 @@ export default function PricingAgent() {
 
       {/* Input Card */}
 
-      <div className="max-w-3xl mx-auto mt-16 bg-white shadow-2xl rounded-3xl p-10">
+      <div className="max-w-3xl mx-auto mt-16 bg-paper text-ink shadow-2xl rounded-3xl border border-paper-line p-10">
 
         <h2 className="text-2xl font-bold mb-6">
           Product Details
@@ -145,7 +145,7 @@ export default function PricingAgent() {
         <button
           onClick={generatePricing}
           disabled={loading}
-          className="mt-8 bg-pink-600 text-white px-8 py-4 rounded-xl hover:bg-pink-700 disabled:bg-gray-400"
+          className="mt-8 bg-stamp text-paper px-8 py-4 rounded-xl hover:bg-ink-light disabled:bg-gray-400"
         >
           {loading ? "Analyzing..." : "Generate Pricing Strategy"}
         </button>
@@ -183,9 +183,9 @@ export default function PricingAgent() {
 
         <div className="grid md:grid-cols-3 gap-6">
 
-          <div className="bg-white shadow-xl rounded-2xl p-6 text-center">
+          <div className="bg-paper text-ink shadow-xl rounded-2xl border border-paper-line p-6 text-center">
 
-            <h3 className="text-gray-500 font-semibold">
+            <h3 className="text-ink/60 font-semibold">
               Amazon
             </h3>
 
@@ -195,9 +195,9 @@ export default function PricingAgent() {
 
           </div>
 
-          <div className="bg-white shadow-xl rounded-2xl p-6 text-center">
+          <div className="bg-paper text-ink shadow-xl rounded-2xl border border-paper-line p-6 text-center">
 
-            <h3 className="text-gray-500 font-semibold">
+            <h3 className="text-ink/60 font-semibold">
               Flipkart
             </h3>
 
@@ -207,13 +207,13 @@ export default function PricingAgent() {
 
           </div>
 
-          <div className="bg-white shadow-xl rounded-2xl p-6 text-center">
+          <div className="bg-paper text-ink shadow-xl rounded-2xl border border-paper-line p-6 text-center">
 
-            <h3 className="text-gray-500 font-semibold">
+            <h3 className="text-ink/60 font-semibold">
               Meesho Average
             </h3>
 
-            <p className="text-4xl font-bold text-pink-600 mt-3">
+            <p className="text-4xl font-bold text-mustard mt-3">
               ₹{meeshoPrice}
             </p>
 
@@ -283,7 +283,7 @@ export default function PricingAgent() {
 
         <div className="grid md:grid-cols-3 gap-6 mt-10">
 
-          <div className="bg-white shadow-xl rounded-2xl p-6 text-center">
+          <div className="bg-paper text-ink shadow-xl rounded-2xl border border-paper-line p-6 text-center">
 
             <h3 className="font-semibold">
               💵 Profit
@@ -295,7 +295,7 @@ export default function PricingAgent() {
 
           </div>
 
-          <div className="bg-white shadow-xl rounded-2xl p-6 text-center">
+          <div className="bg-paper text-ink shadow-xl rounded-2xl border border-paper-line p-6 text-center">
 
             <h3 className="font-semibold">
               📈 Profit Margin
@@ -307,7 +307,7 @@ export default function PricingAgent() {
 
           </div>
 
-          <div className="bg-white shadow-xl rounded-2xl p-6 text-center">
+          <div className="bg-paper text-ink shadow-xl rounded-2xl border border-paper-line p-6 text-center">
 
             <h3 className="font-semibold">
               📊 Confidence
@@ -323,7 +323,7 @@ export default function PricingAgent() {
 
         {/* AI Strategy */}
 
-        <div className="bg-white shadow-2xl rounded-3xl p-10 mt-10">
+        <div className="bg-paper text-ink shadow-2xl rounded-3xl border border-paper-line p-10 mt-10">
 
           <div className="flex justify-between items-center mb-8">
 

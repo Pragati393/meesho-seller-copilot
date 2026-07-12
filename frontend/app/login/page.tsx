@@ -64,17 +64,17 @@ export default function LoginPage() {
 
     return (
 
-        <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-pink-50 to-white">
+        <main className="min-h-screen flex items-center justify-center bg-ink text-paper">
 
-            <div className="bg-white shadow-2xl rounded-3xl p-10 w-[420px]">
+            <div className="bg-paper text-ink shadow-2xl rounded-3xl border border-paper-line p-10 w-[420px]">
 
-                <h1 className="text-4xl font-bold text-center text-pink-600">
+                <h1 className="text-4xl font-bold font-display text-center text-mustard">
 
                     Meesho Seller Co-Pilot
 
                 </h1>
 
-                <p className="text-center text-gray-500 mt-3">
+                <p className="text-center text-ink/60 mt-3">
 
                     Login to continue
 
@@ -114,7 +114,7 @@ export default function LoginPage() {
 
                     disabled={loading}
 
-                    className="w-full mt-8 bg-pink-600 text-white py-4 rounded-xl hover:bg-pink-700"
+                    className="w-full mt-8 bg-stamp text-paper py-4 rounded-xl hover:bg-ink-light"
 
                 >
 
@@ -128,7 +128,7 @@ export default function LoginPage() {
 
                     disabled={loading}
 
-                    className="w-full mt-4 border border-pink-600 text-pink-600 py-4 rounded-xl hover:bg-pink-50"
+                    className="w-full mt-4 border border-stamp text-stamp py-4 rounded-xl hover:bg-paper hover:text-ink"
 
                 >
 

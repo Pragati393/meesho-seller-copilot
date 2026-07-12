@@ -40,15 +40,15 @@ export default function RouterPage() {
 
     return (
 
-        <main className="min-h-screen bg-gradient-to-br from-pink-50 to-white p-10">
+        <main className="min-h-screen bg-ink text-paper p-10">
 
             <div className="max-w-4xl mx-auto">
 
-                <h1 className="text-5xl font-bold text-pink-600 text-center">
+                <h1 className="text-5xl font-bold font-display text-mustard text-center">
                     🤖 AI Seller Assistant
                 </h1>
 
-                <p className="text-center text-gray-500 mt-4 mb-10">
+                <p className="text-center text-parchment mt-4 mb-10">
                     Ask anything. I'll automatically choose the correct AI agent.
                 </p>
 
@@ -63,14 +63,14 @@ export default function RouterPage() {
                 <button
                     onClick={askAssistant}
                     disabled={loading}
-                    className="mt-6 bg-pink-600 text-white px-8 py-4 rounded-xl hover:bg-pink-700"
+                    className="mt-6 bg-stamp text-paper px-8 py-4 rounded-xl hover:bg-ink-light"
                 >
                     {loading ? "Thinking..." : "Ask AI"}
                 </button>
 
                 {agent && (
 
-                    <div className="mt-12 bg-white rounded-2xl shadow-xl p-8">
+                    <div className="mt-12 bg-paper text-ink border border-paper-line rounded-2xl shadow-xl p-8">
 
                         <div className="flex justify-between">
 

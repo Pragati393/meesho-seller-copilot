@@ -65,21 +65,21 @@ export default function ReplyAgent() {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-pink-50 to-white">
+    <main className="min-h-screen bg-ink text-paper">
 
       {/* Heading */}
       <div className="text-center pt-16">
-        <h1 className="text-5xl font-bold text-pink-600">
+        <h1 className="text-5xl font-bold font-display text-mustard">
           💬 Reply Agent
         </h1>
 
-        <p className="text-gray-500 mt-4 text-lg">
+        <p className="text-parchment mt-4 text-lg">
           Generate professional replies for your customers
         </p>
       </div>
 
       {/* Input Card */}
-      <div className="max-w-3xl mx-auto mt-16 bg-white shadow-2xl rounded-3xl p-10">
+      <div className="max-w-3xl mx-auto mt-16 bg-paper text-ink shadow-2xl rounded-3xl border border-paper-line p-10">
 
         <h2 className="text-2xl font-bold mb-6">
           Customer Message
@@ -95,7 +95,7 @@ export default function ReplyAgent() {
         <button
           onClick={generateReply}
           disabled={loading}
-          className="mt-8 bg-pink-600 text-white px-8 py-4 rounded-xl hover:bg-pink-700 disabled:bg-gray-400"
+          className="mt-8 bg-stamp text-paper px-8 py-4 rounded-xl hover:bg-ink-light disabled:bg-gray-400"
         >
           {loading ? "Generating..." : "Generate Reply"}
         </button>
@@ -122,7 +122,7 @@ export default function ReplyAgent() {
 
 </div>
 
-<div className="max-w-5xl mx-auto mt-8 bg-white shadow-2xl rounded-3xl p-10 mb-20">
+<div className="max-w-5xl mx-auto mt-8 bg-paper text-ink shadow-2xl rounded-3xl border border-paper-line p-10 mb-20">
 
         <div className="flex justify-between items-center mb-8">
 

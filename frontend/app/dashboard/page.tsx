@@ -32,17 +32,17 @@ export default function Dashboard() {
 
     return (
 
-        <main className="min-h-screen bg-gradient-to-br from-pink-50 to-white">
+        <main className="min-h-screen bg-ink text-paper">
 
             <Header />
 
             <Hero />
 
-            <AIAssistant />
-
             <Analytics />
 
             <AgentCards />
+
+            <AIAssistant />
 
         </main>
 

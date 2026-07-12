@@ -18,29 +18,35 @@ export default function Header() {
 
     return (
 
-        <header className="flex justify-between items-center px-10 py-6">
+        <header className="flex justify-between items-center px-6 md:px-10 py-6 border-b border-white/10">
 
-            <Link href="/history">
+            <span className="font-display italic text-lg text-parchment tracking-wide">
+                Seller&apos;s Co-Pilot
+            </span>
 
-                <button className="bg-white shadow-lg px-6 py-3 rounded-xl hover:bg-pink-50">
+            <div className="flex items-center gap-4">
 
-                    📜 History
+                <Link href="/history">
+
+                    <button className="font-data text-xs uppercase tracking-widest text-paper border border-paper-line/40 px-5 py-2.5 rounded-t-md hover:bg-ink-light transition">
+                        Register &middot; History
+                    </button>
+
+                </Link>
+
+                <button
+
+                    onClick={logout}
+
+                    className="font-data text-xs uppercase tracking-widest ink-stamp px-5 py-2.5 text-stamp hover:bg-stamp hover:text-paper transition -rotate-2"
+
+                >
+
+                    Logout
 
                 </button>
 
-            </Link>
-
-            <button
-
-                onClick={logout}
-
-                className="bg-pink-600 text-white px-6 py-3 rounded-xl hover:bg-pink-700"
-
-            >
-
-                Logout
-
-            </button>
+            </div>
 
         </header>
 

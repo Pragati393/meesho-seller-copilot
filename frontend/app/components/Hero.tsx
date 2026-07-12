@@ -1,13 +1,18 @@
 export default function Hero() {
   return (
-    <section className="text-center mt-8">
+    <section className="text-center mt-14 px-6">
 
-      <h1 className="text-5xl font-bold text-pink-600">
-        Meesho Seller Co-Pilot
+      <span className="inline-block font-data text-xs uppercase tracking-[0.2em] ink-stamp px-4 py-1.5 text-mustard rotate-1">
+        Today&apos;s Entry
+      </span>
+
+      <h1 className="font-display font-semibold text-4xl md:text-6xl mt-6 text-paper">
+        Meesho Seller Co&#8209;Pilot
       </h1>
 
-      <p className="mt-4 text-gray-500 text-lg">
-        AI Powered Multi-Agent Assistant for E-commerce Sellers
+      <p className="mt-4 text-parchment text-lg font-body max-w-xl mx-auto">
+        The AI multi-agent assistant that writes your listings, prices
+        your stock, and answers your buyers — so you don&apos;t have to.
       </p>
 
     </section>

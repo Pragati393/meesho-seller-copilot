@@ -27,6 +27,29 @@ interface Reply {
   created_at: string;
 }
 
+function ExpandableText({ text }: { text: string }) {
+  const [expanded, setExpanded] = useState(false);
+
+  return (
+    <div>
+      <pre
+        className={`whitespace-pre-wrap mt-4 ${
+          expanded ? "" : "line-clamp-3"
+        }`}
+      >
+        {text}
+      </pre>
+
+      <button
+        onClick={() => setExpanded(!expanded)}
+        className="mt-2 text-sm font-medium text-pink-600 hover:text-pink-700 underline underline-offset-2"
+      >
+        {expanded ? "Show less" : "Show more"}
+      </button>
+    </div>
+  );
+}
+
 export default function HistoryPage() {
   const [listings, setListings] = useState<Listing[]>([]);
   const [pricing, setPricing] = useState<Pricing[]>([]);
@@ -125,9 +148,7 @@ export default function HistoryPage() {
 
               </div>
 
-              <pre className="whitespace-pre-wrap mt-4">
-                {item.listing}
-              </pre>
+              <ExpandableText text={item.listing} />
 
             </div>
           ))
@@ -187,9 +208,7 @@ export default function HistoryPage() {
 
               </div>
 
-              <pre className="whitespace-pre-wrap mt-5">
-                {item.strategy}
-              </pre>
+              <ExpandableText text={item.strategy} />
 
             </div>
           ))
@@ -241,9 +260,7 @@ export default function HistoryPage() {
                   AI Reply
                 </h3>
 
-                <pre className="whitespace-pre-wrap">
-                  {item.reply}
-                </pre>
+                <ExpandableText text={item.reply} />
 
               </div>
 

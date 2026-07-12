@@ -82,18 +82,17 @@ export default function AIAssistant() {
 
     return (
 
-        <section className="max-w-5xl mx-auto mt-12">
+        <section className="max-w-4xl mx-auto mt-14 px-6 pb-20">
 
-            <div className="bg-white rounded-3xl shadow-2xl p-10">
+            <div className="ruled-paper rounded-lg shadow-2xl p-8 md:p-10 text-ink border border-paper-line">
 
-                <h2 className="text-4xl font-bold text-center">
-                    🤖 AI Seller Assistant
+                <h2 className="font-display font-semibold text-3xl text-center">
+                    Ask the Assistant
                 </h2>
 
-                <p className="text-center text-gray-500 mt-4">
-                    Ask anything about selling on Meesho.
-                    The Router Agent will automatically choose
-                    the correct AI Agent.
+                <p className="text-center text-ink/60 mt-3 font-body">
+                    Write your request in your own words. The Router Agent
+                    reads it and hands it to the right specialist.
                 </p>
 
                 <textarea
@@ -106,7 +105,7 @@ export default function AIAssistant() {
 
                     placeholder="Example: Generate a listing for a cotton kurti..."
 
-                    className="w-full mt-8 border rounded-2xl p-5 outline-none focus:ring-2 focus:ring-pink-500"
+                    className="w-full mt-8 bg-transparent border border-ink/20 rounded-md p-5 outline-none focus:ring-2 focus:ring-mustard font-body leading-[35px]"
 
                 />
 
@@ -118,11 +117,11 @@ export default function AIAssistant() {
 
                         disabled={loading}
 
-                        className="bg-pink-600 text-white px-8 py-4 rounded-xl hover:bg-pink-700 transition disabled:bg-gray-400 disabled:cursor-not-allowed"
+                        className="ink-stamp font-data text-sm px-8 py-3.5 text-stamp border-stamp hover:bg-stamp hover:text-paper transition disabled:opacity-40 disabled:cursor-not-allowed rotate-1"
 
                     >
 
-                        {loading ? "Thinking..." : "🚀 Ask AI"}
+                        {loading ? "Thinking…" : "Ask AI"}
 
                     </button>
 
@@ -131,24 +130,24 @@ export default function AIAssistant() {
 
                 {response && (
 
-<div className="mt-6 bg-gray-50 rounded-2xl p-6">
+<div className="mt-6 bg-paper border border-paper-line rounded-md p-6">
 
     <div className="flex justify-between items-center mb-4">
 
-        <h3 className="text-xl font-bold">
+        <h3 className="font-display font-semibold text-lg">
             AI Response
         </h3>
 
         <button
             onClick={copyResponse}
-            className="bg-green-600 text-white px-4 py-2 rounded-lg"
+            className="font-data text-xs uppercase tracking-widest text-ledger-green border border-ledger-green px-3 py-1.5 rounded hover:bg-ledger-green hover:text-paper transition"
         >
             Copy
         </button>
 
     </div>
 
-    <pre className="whitespace-pre-wrap">
+    <pre className="whitespace-pre-wrap font-body text-sm">
         {response}
     </pre>
 
@@ -172,7 +171,7 @@ export default function AIAssistant() {
                             router.push("/reply-agent");
 
                     }}
-                    className="bg-pink-600 text-white px-6 py-3 rounded-xl hover:bg-pink-700"
+                    className="font-data text-xs uppercase tracking-widest bg-ink text-paper px-5 py-2.5 rounded hover:bg-ink-light transition"
                 >
                     {option}
                 </button>

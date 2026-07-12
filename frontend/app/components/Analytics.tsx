@@ -54,54 +54,46 @@ export default function Analytics() {
 
     return (
 
-        <section className="max-w-6xl mx-auto mt-12">
+        <section className="max-w-4xl mx-auto mt-14 px-6">
 
-            <div className="grid md:grid-cols-3 gap-8">
+            <p className="font-data text-xs uppercase tracking-[0.2em] text-parchment text-center mb-3">
+                &mdash; Today&apos;s Register &mdash;
+            </p>
 
-                <div className="bg-white shadow-xl rounded-3xl p-8 text-center">
+            <div className="grid grid-cols-3 divide-x divide-paper-line/30 bg-ink-light rounded-lg border border-white/10">
 
-                    <h1 className="text-5xl font-bold text-pink-600">
+                <div className="p-6 md:p-8 text-center">
 
+                    <h1 className="font-data text-4xl md:text-5xl font-semibold text-mustard">
                         {stats.listings}
-
                     </h1>
 
-                    <p className="mt-4 text-gray-500">
-
-                        📦 Listings Generated
-
+                    <p className="mt-3 text-parchment text-sm font-body">
+                        Listings Generated
                     </p>
 
                 </div>
 
-                <div className="bg-white shadow-xl rounded-3xl p-8 text-center">
+                <div className="p-6 md:p-8 text-center">
 
-                    <h1 className="text-5xl font-bold text-green-600">
-
+                    <h1 className="font-data text-4xl md:text-5xl font-semibold text-ledger-green">
                         {stats.pricing}
-
                     </h1>
 
-                    <p className="mt-4 text-gray-500">
-
-                        💰 Pricing Reports
-
+                    <p className="mt-3 text-parchment text-sm font-body">
+                        Pricing Reports
                     </p>
 
                 </div>
 
-                <div className="bg-white shadow-xl rounded-3xl p-8 text-center">
+                <div className="p-6 md:p-8 text-center">
 
-                    <h1 className="text-5xl font-bold text-blue-600">
-
+                    <h1 className="font-data text-4xl md:text-5xl font-semibold text-stamp">
                         {stats.replies}
-
                     </h1>
 
-                    <p className="mt-4 text-gray-500">
-
-                        💬 Customer Replies
-
+                    <p className="mt-3 text-parchment text-sm font-body">
+                        Customer Replies
                     </p>
 
                 </div>

@@ -1,26 +1,59 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Ledger-book palette — all pink */
+  --ink: #831843;
+  --ink-light: #9d174d;
+  --paper: #fdf2f8;
+  --paper-line: #fbcfe8;
+  --mustard: #ec4899;
+  --stamp: #be185d;
+  --ledger-green: #db2777;
+  --parchment: #f9a8d4;
+
+  --background: var(--ink);
+  --foreground: var(--paper);
 }
 
 @theme inline {
+  --color-ink: var(--ink);
+  --color-ink-light: var(--ink-light);
+  --color-paper: var(--paper);
+  --color-paper-line: var(--paper-line);
+  --color-mustard: var(--mustard);
+  --color-stamp: var(--stamp);
+  --color-ledger-green: var(--ledger-green);
+  --color-parchment: var(--parchment);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  --font-data: var(--font-data);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body), Arial, Helvetica, sans-serif;
+  font-weight: 500;
+}
+
+/* Ruled-notebook texture, used behind the AI assistant's input */
+.ruled-paper {
+  background-color: var(--paper);
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent,
+    transparent 34px,
+    var(--paper-line) 35px
+  );
+}
+
+/* Hand-stamped ink badge used on agent cards */
+.ink-stamp {
+  border: 2px solid currentColor;
+  border-radius: 9999px;
+  font-family: var(--font-data);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
