@@ -21,6 +21,7 @@ app.add_middleware(
         "http://127.0.0.1:3000",
         "https://meesho-seller-copilot.vercel.app",
     ],
+    allow_origin_regex=r"https://meesho-seller-copilot-.*\.vercel\.app",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
