@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import ReactMarkdown from "react-markdown";
-import { supabase } from "../../lib/supabase";
+import { apiFetch } from "../../lib/api";
 
 export default function ReplyAgent() {
   const [message, setMessage] = useState("");
@@ -21,31 +21,19 @@ export default function ReplyAgent() {
 
   try {
 
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
+    const data = await apiFetch<{ reply: string }>("/reply", {
+      method: "POST",
+      body: { message },
+    });
 
-    if (!user) {
-      alert("Please login first.");
-      return;
-    }
-
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/reply?message=${encodeURIComponent(message)}&user_id=${user.id}`
-    );
-
-    const data = await response.json();
-
-    if (data.reply) {
-      setReply(data.reply);
-    } else {
-      setReply(data.error || "⚠️ Unable to generate reply.");
-    }
+    setReply(data.reply);
 
   } catch (error) {
 
     console.error(error);
-    setReply("⚠️ Unable to connect to the server.");
+    setReply(
+      error instanceof Error ? `⚠️ ${error.message}` : "⚠️ Unable to connect to the server."
+    );
 
   } finally {
 

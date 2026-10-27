@@ -1,5 +1,3 @@
-
-
 services:
   backend:
     build:
@@ -14,11 +12,14 @@ services:
   frontend:
     build:
       context: ./frontend
+      args:
+        # The browser (not the container) calls the API, so use a host-reachable URL.
+        NEXT_PUBLIC_API_URL: http://localhost:8000
+        NEXT_PUBLIC_SUPABASE_URL: ${NEXT_PUBLIC_SUPABASE_URL}
+        NEXT_PUBLIC_SUPABASE_ANON_KEY: ${NEXT_PUBLIC_SUPABASE_ANON_KEY}
     container_name: meesho-frontend
     ports:
       - "3000:3000"
     depends_on:
       - backend
-    environment:
-      NEXT_PUBLIC_API_URL: http://backend:8000
     restart: unless-stopped

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import ReactMarkdown from "react-markdown";
-import { supabase } from "../../lib/supabase";
+import { apiFetch } from "../../lib/api";
 
 export default function Home() {
   const [product, setProduct] = useState("");
@@ -12,7 +12,6 @@ export default function Home() {
 
 async function generateListing() {
 
-  console.log("1 - Button clicked");
 
   if (!product.trim()) {
     alert("Please enter a product name.");
@@ -23,42 +22,19 @@ async function generateListing() {
 
   try {
 
-    console.log("2 - Getting user");
+    const data = await apiFetch<{ listing: string }>("/generate", {
+      method: "POST",
+      body: { product },
+    });
 
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-
-    console.log("3 - User:", user);
-
-    if (!user) {
-      alert("Please login first.");
-      setLoading(false);
-      return;
-    }
-
-    console.log("4 - Sending request");
-
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/generate?product=${encodeURIComponent(product)}&user_id=${user.id}`
-    );
-
-    console.log("5 - Response received");
-
-    const data = await response.json();
-
-    console.log("6 - Data:", data);
-
-    if (data.listing) {
-      setListing(data.listing);
-    } else {
-      setListing(data.error || "⚠️ AI service temporarily unavailable.");
-    }
+    setListing(data.listing);
 
   } catch (error) {
 
-    console.error("ERROR:", error);
-    setListing("⚠️ Unable to connect to the server.");
+    console.error(error);
+    setListing(
+      error instanceof Error ? `⚠️ ${error.message}` : "⚠️ Unable to connect to the server."
+    );
 
   } finally {
 

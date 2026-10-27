@@ -1,19 +1,13 @@
-import os
-from dotenv import load_dotenv
-import google.generativeai as genai
+import logging
+
 from database import supabase
+from gemini_client import generate_text
 
-load_dotenv()
-print("Gemini Key Loaded:", os.getenv("GEMINI_API_KEY"))
+logger = logging.getLogger(__name__)
 
-genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
-model = genai.GenerativeModel("gemini-2.5-flash")
-def generate_listing(product, user_id):
-
-    print("Generating listing...")
-
-    prompt = f"""
+def build_prompt(product: str) -> str:
+    return f"""
 Generate:
 
 1. Product Title
@@ -26,26 +20,17 @@ Product:
 {product}
 """
 
+
+def generate_listing(product: str, user_id: str) -> str:
+    listing = generate_text(build_prompt(product))
+
+    # The generated content is the product; a failed history write should not
+    # throw it away.
     try:
+        supabase.table("seller_listings").insert(
+            {"user_id": user_id, "product_name": product, "listing": listing}
+        ).execute()
+    except Exception:
+        logger.exception("Failed to save listing history")
 
-        response = model.generate_content(prompt)
-
-        print("Gemini response received")
-
-        supabase.table("seller_listings").insert({
-
-            "user_id": user_id,
-            "product_name": product,
-            "listing": response.text
-
-        }).execute()
-
-        print("Saved to Supabase")
-
-        return response.text
-
-    except Exception as e:
-
-        print("ERROR:", e)
-
-        return f"Error: {str(e)}"
+    return listing
