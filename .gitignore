@@ -25,3 +25,6 @@ frontend/.next/
 .env
 backend/.env
 frontend/.env.local
+# Local env files
+.env
+.env.local

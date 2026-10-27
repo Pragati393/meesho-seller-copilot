@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { supabase } from "../../lib/supabase";
+import { apiFetch } from "../../lib/api";
 export default function Analytics() {
 
     const [stats, setStats] = useState({
@@ -24,17 +24,11 @@ export default function Analytics() {
 
     try {
 
-        const {
-            data: { user },
-        } = await supabase.auth.getUser();
-
-        if (!user) return;
-
-        const response = await fetch(
-            `${process.env.NEXT_PUBLIC_API_URL}/dashboard/stats?user_id=${user.id}`
-        );
-
-        const data = await response.json();
+        const data = await apiFetch<{
+            total_listings: number;
+            total_pricing: number;
+            total_replies: number;
+        }>("/dashboard/stats");
 
         setStats({
             listings: data.total_listings,

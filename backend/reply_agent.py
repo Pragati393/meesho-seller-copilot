@@ -1,12 +1,13 @@
-import google.generativeai as genai
+import logging
+
 from database import supabase
+from gemini_client import generate_text
 
-model = genai.GenerativeModel("gemini-2.5-flash")
+logger = logging.getLogger(__name__)
 
 
-def generate_reply(message, user_id):
-
-    prompt = f"""
+def build_prompt(message: str) -> str:
+    return f"""
 You are a professional Meesho seller.
 
 Write a polite, professional and concise reply.
@@ -16,24 +17,15 @@ Customer Message:
 {message}
 """
 
+
+def generate_reply(message: str, user_id: str) -> str:
+    reply = generate_text(build_prompt(message))
+
     try:
+        supabase.table("seller_replies").insert(
+            {"user_id": user_id, "customer_message": message, "reply": reply}
+        ).execute()
+    except Exception:
+        logger.exception("Failed to save reply history")
 
-        response = model.generate_content(prompt)
-
-        supabase.table("seller_replies").insert({
-
-            "user_id": user_id,
-
-            "customer_message": message,
-
-            "reply": response.text
-
-        }).execute()
-
-        return response.text
-
-    except Exception as e:
-
-        print("Reply Agent Error:", e)
-
-        return "⚠️ AI service is temporarily unavailable. Please try again later."
+    return reply

@@ -43,7 +43,7 @@ or
 
 > "Suggest a selling price for this product."
 
-It then performs lightweight intent classification with **confidence scoring**, **ambiguity detection**, and **clarification fallback** before routing the request to the appropriate specialized AI agent.
+It then performs lightweight keyword-based intent classification with **score comparison**, **ambiguity detection** (ties), and **clarification fallback** before routing the request to the appropriate specialized AI agent.
 
 Instead of making incorrect assumptions, the Router Agent asks the user to choose the correct agent whenever the request is ambiguous.
 
@@ -83,7 +83,9 @@ Features:
 - Gemini-generated pricing explanation
 - Automatic history storage
 
-The Pricing Agent currently uses a curated local dataset with **SequenceMatcher-based fuzzy matching** to identify similar products before generating pricing recommendations.
+The Pricing Agent currently uses a small curated local dataset (`products.json`, 10 products; these are **estimated prices, not live scraped data**) with **SequenceMatcher-based fuzzy matching** to identify similar products before generating pricing recommendations. A match needs a keyword hit (typo-tolerant) or strong name similarity; otherwise the API returns 404 instead of pricing the wrong product.
+
+**Why SequenceMatcher over embeddings?** For a catalogue this small it adds no extra API call, model, or vector store, so there is no added latency or infrastructure, and results are deterministic and unit-testable. Embeddings would be the right call once the catalogue grows beyond what a linear scan handles.
 
 ---
 
@@ -140,9 +142,11 @@ Features:
 - Email authentication
 - Protected routes
 - Persistent login sessions
-- User-level data isolation
+- Server-verified, per-user data isolation
 
-Every database table is associated with a **user_id**, ensuring each seller can only access their own listings, pricing reports, and replies.
+**How tenant isolation works:** the frontend sends the Supabase access token as `Authorization: Bearer <jwt>`. The FastAPI backend validates it with Supabase Auth (`auth.py`) and uses the verified user id as the tenant key on every query. Clients never send a `user_id`, so one seller cannot read another's listings, pricing reports, or replies (covered by `test_client_supplied_user_id_is_ignored`).
+
+> The backend uses the Supabase service-role key (which bypasses RLS), so the `user_id` filter is enforced in application code. A defence-in-depth next step is enabling Postgres Row Level Security and querying with the user's JWT.
 
 ---
 
@@ -222,13 +226,16 @@ meesho-seller-copilot/
 │
 ├── backend/
 │   ├── main.py
+│   ├── auth.py
+│   ├── gemini_client.py
 │   ├── database.py
 │   ├── history.py
 │   ├── listing_agent.py
 │   ├── pricing_agent.py
 │   ├── reply_agent.py
 │   ├── router_agent.py
-│   └── products.json
+│   ├── products.json
+│   └── tests/
 │
 ├── frontend/
 │   ├── app/
@@ -250,16 +257,31 @@ meesho-seller-copilot/
 
 # 📡 API Endpoints
 
-| Endpoint | Description |
+All endpoints except `/router` and `/health` require `Authorization: Bearer <supabase access token>`. Errors use proper HTTP status codes (401 unauthenticated, 404 unknown product, 422 invalid input, 503 AI provider unavailable).
+
+| Endpoint | Body / description |
 |------------|-------------|
-| GET `/generate` | Generate product listing |
-| GET `/pricing` | Generate pricing strategy |
-| GET `/reply` | Generate customer reply |
-| GET `/router` | Route request to the correct AI agent |
-| GET `/dashboard/stats` | User analytics |
+| POST `/generate` | `{ "product": str }` — generate product listing |
+| POST `/pricing` | `{ "product": str, "cost_price": float > 0 }` — pricing strategy |
+| POST `/reply` | `{ "message": str }` — customer reply |
+| GET `/router?query=` | Route a request to the right agent (public, stateless) |
+| GET `/dashboard/stats` | Analytics for the authenticated user |
 | GET `/history/listings` | Listing history |
 | GET `/history/pricing` | Pricing history |
 | GET `/history/replies` | Reply history |
+| GET `/health` | Liveness check |
+
+---
+
+# 🧪 Tests
+
+```bash
+cd backend
+pip install -r requirements-dev.txt
+pytest
+```
+
+24 offline tests (Supabase and Gemini are mocked) cover router intent/ambiguity logic, pricing math and fuzzy matching, authentication, tenant isolation, input validation, and error mapping.
 
 ---
 
@@ -331,9 +353,20 @@ SUPABASE_KEY=your_supabase_service_role_key
 ### Frontend `.env.local`
 
 ```env
+NEXT_PUBLIC_API_URL=http://localhost:8000
+
 NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
 
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
+
+---
+
+### Docker
+
+```bash
+# root .env needs NEXT_PUBLIC_SUPABASE_URL / NEXT_PUBLIC_SUPABASE_ANON_KEY; backend/.env the backend keys
+docker compose up --build
 ```
 
 > Never commit actual `.env` files to GitHub. Only commit `.env.example`.
@@ -379,10 +412,12 @@ _Add screenshot_
 - [ ] Voice-enabled seller assistant
 - [ ] Multilingual listing generation
 - [ ] Multilingual customer replies
-- [ ] Docker deployment
 - [ ] CI/CD pipeline
-- [ ] Automated unit tests for Router Agent and Pricing calculations
+- [ ] Postgres Row Level Security as a second isolation layer
+- [ ] Rate limiting on AI endpoints
+- [ ] CI pipeline running the test suite
 - [ ] Response caching for repeated prompts
+- [ ] Replace `SequenceMatcher` with embeddings once the catalogue outgrows a linear scan
 
 ---
 

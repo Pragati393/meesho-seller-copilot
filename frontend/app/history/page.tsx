@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { supabase } from "../../lib/supabase";
+import { apiFetch } from "../../lib/api";
 interface Listing {
   id: number;
   product_name: string;
@@ -40,35 +40,20 @@ export default function HistoryPage() {
 
   try {
 
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
+    const [listingData, pricingData, replyData] = await Promise.all([
+      apiFetch<Listing[]>("/history/listings"),
+      apiFetch<Pricing[]>("/history/pricing"),
+      apiFetch<Reply[]>("/history/replies"),
+    ]);
 
-    if (!user) {
-      alert("Please login first.");
-      return;
-    }
-
-    const listingRes = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/history/listings?user_id=${user.id}`
-    );
-
-    const pricingRes = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/history/pricing?user_id=${user.id}`
-    );
-
-    const replyRes = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/history/replies?user_id=${user.id}`
-    );
-
-    setListings(await listingRes.json());
-    setPricing(await pricingRes.json());
-    setReplies(await replyRes.json());
+    setListings(listingData);
+    setPricing(pricingData);
+    setReplies(replyData);
 
   } catch (error) {
 
     console.error(error);
-    alert("Unable to load history.");
+    alert(error instanceof Error ? error.message : "Unable to load history.");
 
   }
 

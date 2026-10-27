@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import ReactMarkdown from "react-markdown";
-import { supabase } from "../../lib/supabase";
+import { apiFetch } from "../../lib/api";
 
 export default function PricingAgent() {
   const [product, setProduct] = useState("");
@@ -44,25 +44,28 @@ export default function PricingAgent() {
 
   try {
 
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-
-    if (!user) {
-      alert("Please login first.");
+    const cost = Number(costPrice);
+    if (!Number.isFinite(cost) || cost <= 0) {
+      alert("Cost price must be a positive number.");
       return;
     }
 
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/pricing?product=${encodeURIComponent(product)}&cost_price=${costPrice}&user_id=${user.id}`
-    );
-
-    const data = await response.json();
-
-    if (data.error) {
-      alert(data.error);
-      return;
-    }
+    const data = await apiFetch<{
+      amazon_price: number;
+      flipkart_price: number;
+      meesho_price: number;
+      aggressive_price: number;
+      balanced_price: number;
+      premium_price: number;
+      recommended_price: number;
+      profit: number;
+      profit_margin: number;
+      confidence: string;
+      strategy: string;
+    }>("/pricing", {
+      method: "POST",
+      body: { product, cost_price: cost },
+    });
 
     setAmazonPrice(data.amazon_price);
     setFlipkartPrice(data.flipkart_price);
@@ -84,7 +87,7 @@ export default function PricingAgent() {
   } catch (error) {
 
     console.error(error);
-    alert("Unable to connect to the server.");
+    alert(error instanceof Error ? error.message : "Unable to connect to the server.");
 
   } finally {
 
